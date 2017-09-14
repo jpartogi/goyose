@@ -19,6 +19,6 @@ func main() {
 
     r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 
-    log.Debug(http.ListenAndServe(":"+ port, r))
+    log.Fatal(http.ListenAndServe(":"+ port, r))
 
 }
