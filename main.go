@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"github.com/gorilla/mux"	
-	"github.com/jpartogi/goyose/handlers"
+
+	"github.com/jpartogi/goyose/config"
 )
 
 func main() {
@@ -14,10 +14,7 @@ func main() {
 		port = "8000"
 	}
 
-    r := mux.NewRouter()
-    r.HandleFunc("/", handlers.HomeHandler).Methods("GET")
-
-    r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
+	r := config.Routes()
 
     log.Fatal(http.ListenAndServe(":"+ port, r))
 
