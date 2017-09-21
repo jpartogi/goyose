@@ -1,18 +1,14 @@
-package main
+package tests
 
 import (
 	"net/http"
-	"net/http/httptest"
 	"testing"
 
   "github.com/jpartogi/goyose/handlers"
 )
 
 func TestPing(t *testing.T) {
-  
-  req := httptest.NewRequest(http.MethodGet, "/ping", nil)
-  req.Header.Set("Content-Type", "application/json")
-  rec := httptest.NewRecorder()
+  req, rec := TestAPI("/ping", http.MethodGet)  
 
   handlers.PingHandler(rec, req)
 

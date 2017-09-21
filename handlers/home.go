@@ -2,10 +2,11 @@ package handlers
 
 import (
 	"net/http"
-	"html/template"
+
+	"github.com/jpartogi/goyose/view"
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-    t, _ := template.ParseFiles("templates/home.html")  // Parse template file.
-    t.Execute(w, nil)
+	v:= view.New("home.html")
+    v.Render(w)
 }

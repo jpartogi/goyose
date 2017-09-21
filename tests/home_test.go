@@ -1,19 +1,15 @@
-package main
+package tests
 
 import (
-	"net/http"
-	"net/http/httptest"
 	"testing"
   "strings"
+  "net/http"
 
   "github.com/jpartogi/goyose/handlers"
 )
 
-func TestSomething(t *testing.T) {
-  
-  req := httptest.NewRequest(http.MethodGet, "/", nil)
-  req.Header.Set("Content-Type", "text/html")
-  rec := httptest.NewRecorder()
+func TestHome(t *testing.T) {
+  req, rec := TestHtmlPage("/", http.MethodGet)
 
   handlers.HomeHandler(rec, req)
 
