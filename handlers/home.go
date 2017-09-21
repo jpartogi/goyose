@@ -7,6 +7,6 @@ import (
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
-	v:= view.New("home.html")
+	v:= view.New("home")
     v.Render(w)
 }

@@ -37,14 +37,15 @@ func New(template string) *View {
 
 // Render renders a template to the writer
 func (v *View) Render(w http.ResponseWriter) {
-	log.Println(config.TemplateFolder)
+	log.Println("Template folder: " + config.TemplateFolder)
 
-	t, err := template.ParseFiles(config.TemplateFolder+string(os.PathSeparator)+v.Template)
+	//t, err := template.ParseFiles(config.TemplateFolder+string(os.PathSeparator)+v.Template)
 
-	if err != nil {
-		http.Error(w, "Template File Error: "+err.Error(), http.StatusInternalServerError)
-	}
+ 	t:= template.Must(template.ParseGlob(config.TemplateFolder+string(os.PathSeparator)+"*"))
+    err := t.ExecuteTemplate(w, v.Template, nil)
 
-	t.Execute(w, nil)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
 }
-
